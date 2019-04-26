@@ -12,15 +12,15 @@ namespace cpp_class7 {
 	class Citizen;
 	class City {
 	private:
-		unsigned int length;
-		unsigned int capacity;
-		Citizen * citizens;
+		unsigned int mLength;
+		unsigned int mCapacity;
+		Citizen * mCitizens;
 	public:
 
 		friend class cpp_class7_test::TestCity;
 
 		City(const City& other);
-		City(unsigned int inCapacity);
+		City(const unsigned int inCapacity);
 		~City();
 		unsigned int getCapacity() const;
 		unsigned int getLength() const;

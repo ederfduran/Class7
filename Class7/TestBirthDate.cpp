@@ -6,19 +6,19 @@
 void cpp_class7_test::TestBirthDate::testGetDay() const
 {
 	cpp_class7::BirthDate birthTest(1992,6,3);
-	assert(birthTest.day==birthTest.getDay()&& birthTest.day==6);
+	assert(birthTest.mDay==birthTest.getDay()&& birthTest.mDay==6);
 }
 
 void cpp_class7_test::TestBirthDate::testGetMonth() const
 {
 	cpp_class7::BirthDate birthTest(1992, 6, 3);
-	assert(birthTest.month == birthTest.getMonth() && birthTest.month == 3);
+	assert(birthTest.mMonth == birthTest.getMonth() && birthTest.mMonth == 3);
 }
 
 void cpp_class7_test::TestBirthDate::testGetYear() const
 {
 	cpp_class7::BirthDate birthTest(1992, 6, 3);
-	assert(birthTest.year == birthTest.getYear() && birthTest.year == 1992);
+	assert(birthTest.mYear == birthTest.getYear() && birthTest.mYear == 1992);
 }
 
 void cpp_class7_test::TestBirthDate::testToString() const
@@ -31,7 +31,7 @@ void cpp_class7_test::TestBirthDate::testToString() const
 void cpp_class7_test::TestBirthDate::testGetZodicaSign() const
 {
 	cpp_class7::BirthDate birthTest(1990, 1, 5);
-	cpp_class7::zodiacSign expectedResult = cpp_class7::ZS_TAURUS;
+	cpp_class7::ZodiacSign expectedResult = cpp_class7::ZS_TAURUS;
 	assert(expectedResult== birthTest.getZodicaSign());
 }
 

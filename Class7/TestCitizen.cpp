@@ -21,7 +21,7 @@ void cpp_class7_test::TestCitizen::testGetName() const
 	std::string nameTest = "Benito";
 	std::string sureNameTest = "Fulanito";
 	cpp_class7::Citizen citizenTets(birthTest, nameTest, sureNameTest, cpp_class7::G_MALE);
-	assert(citizenTets.name== citizenTets.getName());
+	assert(citizenTets.mName== citizenTets.getName());
 }
 
 void cpp_class7_test::TestCitizen::testGetSureName() const
@@ -30,7 +30,7 @@ void cpp_class7_test::TestCitizen::testGetSureName() const
 	std::string nameTest = "Benito";
 	std::string sureNameTest = "Fulanito";
 	cpp_class7::Citizen citizenTets(birthTest, nameTest, sureNameTest, cpp_class7::G_MALE);
-	assert(citizenTets.sureName == citizenTets.getSureName());
+	assert(citizenTets.mSureName == citizenTets.getSureName());
 }
 
 void cpp_class7_test::TestCitizen::testGetGender() const

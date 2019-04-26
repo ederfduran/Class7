@@ -1,56 +1,62 @@
 #include <string.h>
+#include <stdlib.h>
 
+#include "BirthDate.h"
 #include "City.h"
 #include "Citizen.h"
 
 
 cpp_class7::City::City(const City & other)
-	: length(other.getLength()), capacity(other.getCapacity()), citizens(new Citizen[other.getCapacity()])
+	: mLength(other.getLength()), mCapacity(other.getCapacity()), mCitizens(reinterpret_cast<Citizen*>(malloc(sizeof(Citizen)*other.getCapacity())))
 {
 	//std::copy(other.citizens, other.citizens + other.capacity, citizens);
-	memcpy(citizens,other.citizens,sizeof(Citizen)*capacity);
+	memcpy(mCitizens,other.mCitizens,sizeof(Citizen)*mCapacity);
 }
 
-cpp_class7::City::City(unsigned int inCapacity)
-	:length(0),capacity(inCapacity),citizens(new Citizen[inCapacity])
+cpp_class7::City::City(const unsigned int inCapacity)
+	:mLength(0),mCapacity(inCapacity),mCitizens(reinterpret_cast<Citizen*>(malloc(sizeof(Citizen)*inCapacity)))
 {
 }
 
 cpp_class7::City::~City()
 {
-	delete[] citizens;
+	for (unsigned int i = 0; i < mLength; i++) {
+		mCitizens[i].~Citizen();
+	}
+
+	free(mCitizens);
 }
 
 unsigned int cpp_class7::City::getCapacity() const
 {
-	return capacity;
+	return mCapacity;
 }
 
 unsigned int cpp_class7::City::getLength() const
 {
-	return length;
+	return mLength;
 }
 
 bool cpp_class7::City::addCitizen(const Citizen & citizen)
 {
-	if (capacity<=length) {
+	if (mCapacity<=mLength) {
 		return false;
 	}
-	for (unsigned int i = 0;i<length;i++) {
-		if (citizens[i].getName()== citizen.getName()
-			&& citizens[i].getSureName() == citizen.getSureName()) {
+	for (unsigned int i = 0;i<mLength;i++) {
+		if (mCitizens[i].getName()== citizen.getName()
+			&& mCitizens[i].getSureName() == citizen.getSureName()) {
 			return false;
 		}
 	}
-	citizens[length++] = citizen;
+	new (&mCitizens[mLength++]) Citizen(citizen);
 	return true;
 }
 
 unsigned int cpp_class7::City::getRetiredCount() const
 {
 	unsigned int count = 0;
-	for (unsigned int i = 0;i<length;i++) {
-		if (citizens[i].isRetired()) {
+	for (unsigned int i = 0;i<mLength;i++) {
+		if (mCitizens[i].isRetired()) {
 			count++;
 		}
 	}
@@ -60,8 +66,8 @@ unsigned int cpp_class7::City::getRetiredCount() const
 unsigned int cpp_class7::City::getChildCount() const
 {
 	unsigned int count = 0;
-	for (unsigned int i = 0; i<length; i++) {
-		if (citizens[i].isChild()) {
+	for (unsigned int i = 0; i<mLength; i++) {
+		if (mCitizens[i].isChild()) {
 			count++;
 		}
 	}
@@ -71,8 +77,8 @@ unsigned int cpp_class7::City::getChildCount() const
 unsigned int cpp_class7::City::getTeenagerCount() const
 {
 	unsigned int count = 0;
-	for (unsigned int i = 0; i<length; i++) {
-		if (citizens[i].isTeenager()) {
+	for (unsigned int i = 0; i<mLength; i++) {
+		if (mCitizens[i].isTeenager()) {
 			count++;
 		}
 	}
@@ -82,8 +88,8 @@ unsigned int cpp_class7::City::getTeenagerCount() const
 unsigned int cpp_class7::City::getManCount() const
 {
 	unsigned int count = 0;
-	for (unsigned int i = 0; i<length; i++) {
-		if (citizens[i].getGender()==G_MALE) {
+	for (unsigned int i = 0; i<mLength; i++) {
+		if (mCitizens[i].getGender()==G_MALE) {
 			count++;
 		}
 	}
@@ -93,8 +99,8 @@ unsigned int cpp_class7::City::getManCount() const
 unsigned int cpp_class7::City::getWomanCount() const
 {
 	unsigned int count = 0;
-	for (unsigned int i = 0; i<length; i++) {
-		if (citizens[i].getGender() == G_FEMALE) {
+	for (unsigned int i = 0; i<mLength; i++) {
+		if (mCitizens[i].getGender() == G_FEMALE) {
 			count++;
 		}
 	}
@@ -103,10 +109,10 @@ unsigned int cpp_class7::City::getWomanCount() const
 
 const cpp_class7::Citizen * cpp_class7::City::getCitizenByName(const std::string & name, const std::string & sureName) const
 {
-	for (unsigned int i = 0; i<length; i++) {
-		if (citizens[i].getName() == name
-			&& citizens[i].getSureName() == sureName) {
-			return &citizens[i];
+	for (unsigned int i = 0; i<mLength; i++) {
+		if (mCitizens[i].getName() == name
+			&& mCitizens[i].getSureName() == sureName) {
+			return &mCitizens[i];
 		}
 	}
 	return nullptr;

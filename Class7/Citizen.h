@@ -9,7 +9,7 @@ namespace cpp_class7_test {
 
 namespace cpp_class7 {	
 	class BirthDate;
-	enum gender {
+	enum Gender {
 		G_MALE=0,
 		G_FEMALE
 	};
@@ -19,25 +19,25 @@ namespace cpp_class7 {
 
 		friend class cpp_class7_test::TestCitizen;
 		Citizen();
-		Citizen(const BirthDate & inBirth,std::string & inName,
-			std::string inSureName,const gender& inSex);
+		Citizen(const BirthDate & inBirth,const std::string & inName,
+			const std::string& inSureName,const Gender& inSex);
 		Citizen(const Citizen & other);
 		~Citizen();
 		const Citizen& operator =(const Citizen& other);
 
 		BirthDate* getBirthDate()const;
-		std::string getName()const;
-		std::string getSureName()const;
-		gender getGender()const;
+		const std::string& getName()const;
+		const std::string& getSureName()const;
+		Gender getGender()const;
 		bool isAdult() const;
 		bool isTeenager()const;
 		bool isChild()const;
 		bool isRetired() const;
 
 	private:
-		BirthDate* birth;
-		std::string name, sureName;
-		gender sex;
+		BirthDate* mBirth;
+		std::string mName, mSureName;
+		Gender mSex;
 	
 	};
 }

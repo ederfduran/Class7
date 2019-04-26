@@ -1,25 +1,25 @@
 #include "BirthDate.h"
 #include "Citizen.h"
 
-cpp_class7::Citizen::Citizen():birth(nullptr),
-name(""),sureName(""),sex(G_MALE)
+cpp_class7::Citizen::Citizen():mBirth(nullptr),
+mName(""),mSureName(""),mSex(G_MALE)
 {
 }
 
-cpp_class7::Citizen::Citizen(const BirthDate & inBirth, std::string & inName, std::string inSureName, const gender & inSex)
-	:birth(new BirthDate(inBirth)),name(inName),sureName(inSureName),sex(inSex)
+cpp_class7::Citizen::Citizen(const BirthDate & inBirth, const std::string & inName, const std::string& inSureName, const Gender & inSex)
+	:mBirth(new BirthDate(inBirth)),mName(inName),mSureName(inSureName),mSex(inSex)
 {
 }
 
 cpp_class7::Citizen::Citizen(const Citizen & other)
-	: birth(new BirthDate(*other.birth)), name(other.name), 
-	sureName(other.sureName), sex(other.sex)
+	: mBirth(new BirthDate(*other.mBirth)), mName(other.mName), 
+	mSureName(other.mSureName), mSex(other.mSex)
 {
 }
 
 cpp_class7::Citizen::~Citizen()
 {
-	delete birth;
+	delete mBirth;
 }
 
 const cpp_class7::Citizen & cpp_class7::Citizen::operator=(const Citizen & other)
@@ -27,53 +27,55 @@ const cpp_class7::Citizen & cpp_class7::Citizen::operator=(const Citizen & other
 	if (this == &other) {
 		return *this;
 	}
-	delete birth;
-	birth = new BirthDate(*other.getBirthDate());
-	name = other.getName();
-	sureName = other.getSureName();
-	sex = other.getGender();
+	if (mBirth) {
+		delete mBirth;
+	}
+	mBirth = new BirthDate(*other.getBirthDate());
+	mName = other.getName();
+	mSureName = other.getSureName();
+	mSex = other.getGender();
 	return *this;
 }
 
 cpp_class7::BirthDate* cpp_class7::Citizen::getBirthDate() const
 {
-	return birth;
+	return mBirth;
 }
 
-std::string cpp_class7::Citizen::getName() const
+const std::string& cpp_class7::Citizen::getName() const
 {
-	return name;
+	return mName;
 }
 
-std::string cpp_class7::Citizen::getSureName() const
+const std::string& cpp_class7::Citizen::getSureName() const
 {
-	return sureName;
+	return mSureName;
 }
 
-cpp_class7::gender cpp_class7::Citizen::getGender() const
+cpp_class7::Gender cpp_class7::Citizen::getGender() const
 {
-	return sex;
+	return mSex;
 }
 
 bool cpp_class7::Citizen::isAdult() const
 {
-	return birth->getAge()>=18;
+	return mBirth->getAge()>=18;
 }
 
 bool cpp_class7::Citizen::isTeenager() const
 {
-	return birth->getAge() >= 11 && birth->getAge() < 18;
+	return mBirth->getAge() >= 11 && mBirth->getAge() < 18;
 }
 
 bool cpp_class7::Citizen::isChild() const
 {
-	return birth->getAge() < 11 ;
+	return mBirth->getAge() < 11 ;
 }
 
 bool cpp_class7::Citizen::isRetired() const
 {
-	if (sex==G_MALE) {
-		return birth->getAge() >= 65;
+	if (mSex==G_MALE) {
+		return mBirth->getAge() >= 65;
 	}
-	return birth->getAge() >= 60;
+	return mBirth->getAge() >= 60;
 }

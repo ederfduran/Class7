@@ -30,7 +30,7 @@ void cpp_class7_test::TestCity::testGetCapacity() const
 {
 	const unsigned int testCapacity = 100;
 	cpp_class7::City cityTest(testCapacity);
-	assert(testCapacity==cityTest.capacity);
+	assert(testCapacity==cityTest.mCapacity);
 	
 }
 
@@ -49,7 +49,8 @@ void cpp_class7_test::TestCity::testAddCitizen()
 			i--;
 		};
 	}
-	assert(cityTest.getLength()== cityTest.length && cityTest.length==10);
+
+	assert(cityTest.getLength()== cityTest.mLength && cityTest.mLength==10);
 }
 
 void cpp_class7_test::TestCity::testGetCount() const
@@ -90,6 +91,7 @@ void cpp_class7_test::TestCity::testGetCount() const
 		};
 	}
 
+	int a = cityTest.getChildCount();
 	assert(cityTest.getChildCount()== childNumTest);
 	assert(cityTest.getRetiredCount() == retiredNumTest);
 	assert(cityTest.getTeenagerCount() == teenagerNumTest);

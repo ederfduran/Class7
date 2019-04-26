@@ -11,7 +11,7 @@ namespace cpp_class7_test {
 }
 
 namespace cpp_class7 {
-	enum zodiacSign {
+	enum ZodiacSign {
 	ZS_INVALID=0,
     ZS_ARIES,
 	ZS_TAURUS,
@@ -30,7 +30,7 @@ namespace cpp_class7 {
 	class BirthDate {
 
 	private:
-		unsigned short month,day,year;
+		unsigned short mMonth,mDay,mYear;
 	public:
 		friend class cpp_class7_test::TestBirthDate;
 		BirthDate(const unsigned short inYear, 
@@ -41,7 +41,7 @@ namespace cpp_class7 {
 		unsigned short getMonth() const;
 		unsigned short getYear() const;
 		std::string toString()const ;
-		zodiacSign getZodicaSign() const;
+		ZodiacSign getZodicaSign() const;
 		unsigned short getAge() const;
 	};
 }

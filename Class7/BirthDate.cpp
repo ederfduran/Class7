@@ -5,84 +5,84 @@
 
 
 cpp_class7::BirthDate::BirthDate(const unsigned short inYear, const unsigned short inDay, const unsigned short inMonth)
-	:year(inYear),day(inDay),month(inMonth)
+	:mYear(inYear),mDay(inDay),mMonth(inMonth)
 {
 	assert(inDay>0 && inDay <=31);
 	assert(inMonth>0 && inMonth <= 12);
 }
 
 cpp_class7::BirthDate::BirthDate(const BirthDate & other)
-	:year(other.getYear()),day(other.getDay()),month(other.getMonth())
+	:mYear(other.getYear()),mDay(other.getDay()),mMonth(other.getMonth())
 {
 }
 
 unsigned short cpp_class7::BirthDate::getDay()const {
-	return day;
+	return mDay;
 }
 
 unsigned short cpp_class7::BirthDate::getMonth()const {
-	return month;
+	return mMonth;
 }
 
 unsigned short cpp_class7::BirthDate::getYear()const {
-	return year;
+	return mYear;
 }
 
 std::string cpp_class7::BirthDate::toString() const {
-	return std::to_string(year)+"/"+ std::to_string(day)+"/"+ std::to_string(month);
+	return std::to_string(mYear)+"/"+ std::to_string(mDay)+"/"+ std::to_string(mMonth);
 }
 
-cpp_class7::zodiacSign cpp_class7::BirthDate::getZodicaSign() const
+cpp_class7::ZodiacSign cpp_class7::BirthDate::getZodicaSign() const
 {
-	switch (month)
+	switch (mMonth)
 	{
 	case 1:
 	{
-		return day >= 20 ? ZS_AQUARIUS : ZS_CAPRICORN;
+		return mDay >= 20 ? ZS_AQUARIUS : ZS_CAPRICORN;
 	}
 	case 2:
 	{
-		return day >= 19 ? ZS_PISCES : ZS_AQUARIUS;
+		return mDay >= 19 ? ZS_PISCES : ZS_AQUARIUS;
 	}
 	case 3:
 	{
-		return day >= 21 ? ZS_ARIES : ZS_PISCES;
+		return mDay >= 21 ? ZS_ARIES : ZS_PISCES;
 	}
 	case 4:
 	{
-		return day >= 20 ? ZS_TAURUS : ZS_ARIES;
+		return mDay >= 20 ? ZS_TAURUS : ZS_ARIES;
 	}
 	case 5:
 	{
-		return day >= 21 ? ZS_GEMINI : ZS_TAURUS;
+		return mDay >= 21 ? ZS_GEMINI : ZS_TAURUS;
 	}
 	case 6:
 	{
-		return day >= 21 ? ZS_CANCER : ZS_GEMINI;
+		return mDay >= 21 ? ZS_CANCER : ZS_GEMINI;
 	}
 	case 7:
 	{
-		return day >= 23 ? ZS_LEO : ZS_CANCER;
+		return mDay >= 23 ? ZS_LEO : ZS_CANCER;
 	}
 	case 8:
 	{
-		return day >= 23 ? ZS_VIRGO : ZS_LEO;
+		return mDay >= 23 ? ZS_VIRGO : ZS_LEO;
 	}
 	case 9:
 	{
-		return day >= 23 ? ZS_LIBRA : ZS_VIRGO;
+		return mDay >= 23 ? ZS_LIBRA : ZS_VIRGO;
 	}
 	case 10:
 	{
-		return day >= 23 ? ZS_SCORPIO : ZS_LIBRA;
+		return mDay >= 23 ? ZS_SCORPIO : ZS_LIBRA;
 	}
 	case 11:
 	{
-		return day >= 22 ? ZS_AQUARIUS : ZS_SCORPIO;
+		return mDay >= 22 ? ZS_AQUARIUS : ZS_SCORPIO;
 	}
 	case 12:
 	{
-		return day >= 22 ? ZS_CAPRICORN : ZS_SAGITTARIUS;
+		return mDay >= 22 ? ZS_CAPRICORN : ZS_SAGITTARIUS;
 	}
 	default:
 		return ZS_INVALID;
@@ -91,8 +91,8 @@ cpp_class7::zodiacSign cpp_class7::BirthDate::getZodicaSign() const
 
 unsigned short cpp_class7::BirthDate::getAge() const
 {
-	if (CURRENT_MONTH >= month && CURRENT_DAY >= day) {
-		return CURRENT_YEAR - year;
+	if (CURRENT_MONTH >= mMonth && CURRENT_DAY >= mDay) {
+		return CURRENT_YEAR - mYear;
 	}
-	return CURRENT_YEAR - year-1;
+	return CURRENT_YEAR - mYear-1;
 }
